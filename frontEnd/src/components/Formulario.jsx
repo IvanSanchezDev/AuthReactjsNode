@@ -6,15 +6,14 @@ const Formulario=()=>{
 
     const {register, handleSubmit}=useForm()
 
-    //const{ info, setInfo}=useState({})
+    const[info, setInfo]=useState({})
 
 
-    /*
   useEffect(()=>{
         
         (async ()=>{
             try {
-                console.log(info);
+                
                 const api='http://localhost:1234/auth/login'
                 const response=await fetch(api, {
                     method:'POST',
@@ -25,30 +24,16 @@ const Formulario=()=>{
                     body: JSON.stringify(info)
                 })
                 const result=await response.json()
+                console.log(result);
                 return result
             } catch (error) {
                 console.log(error);
             }
         })()
-    }, [info])*/
+    }, [info])
 
-    const onSubmit=handleSubmit(async (data)=>{
-        try {           
-            const api='http://localhost:1234/auth/login'
-            const response=await fetch(api, {
-                method:'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-            const result=await response.json()
-            console.log(result);
-            return result
-        } catch (error) {
-            console.log(error);
-        }
+    const onSubmit=handleSubmit((data)=>{
+        setInfo(data)
     })
 
     return (
