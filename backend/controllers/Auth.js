@@ -38,7 +38,7 @@ export class Auth {
       const id = {
         id: usuario._id
       }
-      const token = generateAccesToken(id)
+      const token = generateAccessToken(id)
       return res.status(200).json({ status: 200, message: 'Ha ingresado correctamente', token })
     } catch (error) {
       console.log(error)
