@@ -1,6 +1,6 @@
 import { connect, closeConnection } from '../database/connection.js'
 import { validationResult } from 'express-validator'
-import { generateAccesToken } from '../helpers/createToken.js'
+import { generateAccessToken } from '../helpers/createJwt.js'
 
 export class Auth {
   static async Register (req, res) {
