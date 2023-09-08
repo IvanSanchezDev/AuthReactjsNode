@@ -1,4 +1,4 @@
-import { FormRegistro } from "../components/FormRegistro"
+import  FormRegistro  from "../components/FormRegistro"
 
 const Register=()=>{
     return(
