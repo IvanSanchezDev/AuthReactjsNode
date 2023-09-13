@@ -1,39 +1,31 @@
-import {useEffect, useState} from 'react'
+
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 
 const Formulario=()=>{
 
     const {register, handleSubmit}=useForm()
 
-    const[info, setInfo]=useState({})
-
-
-  useEffect(()=>{
-        
-        (async ()=>{
-            try {
+    const navigate = useNavigate();
+    const onSubmit=handleSubmit(async (data)=>{
+        try {
                 
-                const api='http://localhost:1234/auth/login'
-                const response=await fetch(api, {
-                    method:'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(info)
-                })
-                const result=await response.json()
-                console.log(result);
-                return result
-            } catch (error) {
-                console.log(error);
-            }
-        })()
-    }, [info])
-
-    const onSubmit=handleSubmit((data)=>{
-        setInfo(data)
+            const api='http://localhost:1234/api/auth/login'
+            const response=await fetch(api, {
+                method:'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            const result=await response.json()
+            localStorage.setItem('token', result.token)
+            navigate('/Dashboard')
+        } catch (error) {
+           console.log(error);
+        }
     })
 
     return (
