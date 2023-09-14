@@ -14,44 +14,43 @@ export const AuthProvider=({children})=>{
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isloading, setIsLoading] = useState(true);
     const [user, setUser] = useState({});
-    const token=localStorage.getItem('token');
+    
 
     const logout = () => {
         localStorage.clear();
         setIsAuthenticated(false);
     };
 
-    async function checkAuth(token){
+    async function checkAuth(){
         try {
-                console.log("entrrooo");
-                const userInfo=await traerInfo(token)
-                console.log(userInfo);
+          const token=localStorage.getItem('token');
+            if (token) {
+                
+              const userInfo=await traerInfo(token)
+              setIsAuthenticated(true);
+              console.log(userInfo);
                 setUser(userInfo)
-                setIsAuthenticated(true);
+                
                 setIsLoading(false);
-            
-          
+            }else{
+              setIsLoading(false);
+            }
+                
         } catch (error) {
-            setIsAuthenticated(false);
             setIsLoading(false);
         }
     }
     
-    useEffect(() => {
-       
-        if (token) {
-            console.log("existe token");
-            checkAuth(token);
-        }
-        
-      }, [token]);
+    useEffect(() => {         
+      checkAuth();
+    }, [isAuthenticated]);
     
     
 
 
     return (
-        <AuthContext.Provider value={{logout, isAuthenticated,user, isloading }}>
-            {children}
+        <AuthContext.Provider value={{logout, isAuthenticated, user, isloading, setIsAuthenticated }}>
+            {isloading ? <div>Loading...</div> : children}
         </AuthContext.Provider>
     )
 

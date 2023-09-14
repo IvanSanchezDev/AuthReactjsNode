@@ -4,11 +4,11 @@ import { useAuth } from "../context/authContext"
 const Dashboard =()=>{
 
   const {user}=useAuth()
-  console.log(user.username);
+  const {info}=user
       
     return(
         <>
-         <h1> {user.username}</h1>
+         <h1> {info.username}</h1>
         </>
        
     )
