@@ -1,4 +1,5 @@
 import { useContext, createContext, useState, useEffect} from "react";
+import { Navigate } from "react-router-dom";
 const AuthContext = createContext();
 
 
@@ -17,8 +18,10 @@ export const AuthProvider=({children})=>{
     
 
     const logout = () => {
+      
         localStorage.clear();
         setIsAuthenticated(false);
+        <Navigate to='/'/>
     };
 
     async function checkAuth(){
@@ -28,7 +31,7 @@ export const AuthProvider=({children})=>{
                 
               const userInfo=await traerInfo(token)
               setIsAuthenticated(true);
-              console.log(userInfo);
+              
                 setUser(userInfo)
                 
                 setIsLoading(false);
