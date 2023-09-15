@@ -9,3 +9,4 @@ export const routes = Router()
 
 routes.post('/register', registerValidator, Auth.Register)
 routes.post('/login', loginValidator, Auth.Login)
+routes.post('/refresh-token', Auth.RefreshToken)

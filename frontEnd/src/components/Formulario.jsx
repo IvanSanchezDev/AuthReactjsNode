@@ -8,7 +8,7 @@ import { useState } from "react";
 const Formulario=()=>{
     const [errorResponse, setErrorResponse] = useState("");
     const {register, handleSubmit}=useForm()
-    const {isAuthenticated, setIsAuthenticated}=useAuth()
+    const {isAuthenticated,  saveUser}=useAuth()
 
     const onSubmit=handleSubmit(async (data)=>{
         try {
@@ -24,8 +24,7 @@ const Formulario=()=>{
             })
             if (response.ok) {
                 const result=await response.json()
-                localStorage.setItem('token', result.token)
-                setIsAuthenticated(true)
+                saveUser(result)
             }else{
                 const result=await response.json()
                 setErrorResponse(result.message)
