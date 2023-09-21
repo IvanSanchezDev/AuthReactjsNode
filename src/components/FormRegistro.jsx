@@ -1,5 +1,8 @@
 import {useEffect, useState} from 'react'
 import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
+
 
 
 const FormRegistro=()=>{
@@ -8,24 +11,43 @@ const FormRegistro=()=>{
 
     const[info, setInfo]=useState({})
 
+    const navigate=useNavigate()
+
 
   useEffect(()=>{
 
                 const hacerPeticion=async ()=>{
                     try {
                         
-                        const api='http://localhost:1234/auth/register'
+                        const api='http://localhost:1234/api/auth/register'
                         const response=await fetch(api, {
                             method:'POST',
                             headers: {
-                                Accept: 'application/json',
+                               
                                 'Content-Type': 'application/json',
                             },
                             body: JSON.stringify(info)
                         })
                         const result=await response.json()
                         console.log(result);
-                        return result
+
+                        if(result.status!==500){
+                            Swal.fire(
+                                'Correct!',
+                                result.message,
+                                'success'
+                            )
+                            navigate('/Login')
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Try Again!',
+                                footer: 'Error in field ' + result.errors[0].path
+                              })
+                        }
+                       
+                        
                     } catch (error) {
                         console.log(error);
                     }
@@ -39,8 +61,8 @@ const FormRegistro=()=>{
         
 
     const onSubmit=handleSubmit((data)=>{
-        const { username, password, rolSistema, arrPermisos}=data
-        setInfo({ username, password, rol: parseInt(rolSistema), permisos:[arrPermisos]})
+        const { username, password, rolSistema}=data
+        setInfo({ username, password, rol: parseInt(rolSistema)})
     })
 
     return (
@@ -68,13 +90,7 @@ const FormRegistro=()=>{
                 <option value="1">Admin</option>
             </select>
             <br />
-            <label htmlFor="">Versions</label>
-            <select name="versions" {...register("arrPermisos")}>
-                <option value="1.0.0">1.0.0</option>
-                <option value="2.0.0">2.0.0</option>
-            </select>
-            <br />
-
+         
             <input type="submit"  value="Registrarse" />
         </form>
     )

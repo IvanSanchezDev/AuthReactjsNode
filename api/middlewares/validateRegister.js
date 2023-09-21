@@ -14,9 +14,4 @@ export const registerValidator = [
     .notEmpty()
     .isNumeric()
     .withMessage('el rol debe ser de tipo numerico (0 o 1)'),
-  body('permisos')
-    .isArray()
-    .optional()
-    .withMessage('los permisos son de tipo array'),
-  body('permisos.*').isString().withMessage('las permisos son de tipo string')
 ]

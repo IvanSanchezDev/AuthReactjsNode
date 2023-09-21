@@ -17,19 +17,21 @@ const Formulario=()=>{
             const response=await fetch(api, {
                 method:'POST',
                 headers: {
-                    Accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data)
             })
-            if (response.ok) {
+            
                 const result=await response.json()
-                localStorage.setItem('token', result.token)
-                setIsAuthenticated(true)
-            }else{
-                const result=await response.json()
-                setErrorResponse(result.message)
-            }
+                console.log(result);
+               if(result.status!==400){
+                    localStorage.setItem('token', result.token)
+                    setIsAuthenticated(true)
+                }else{
+                    setErrorResponse(result.message)
+                }
+               
+            
             
         } catch (error) {
            console.log(error);

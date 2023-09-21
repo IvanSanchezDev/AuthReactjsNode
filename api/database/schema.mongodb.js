@@ -17,16 +17,10 @@ db.createCollection('usuarios', {
         rol: {
           bsonType: 'int',
           description: 'el rol debe ser de tipo int (0:admin, 1:paciente)'
-        },
-        permisos: {
-          bsonType: 'array',
-          items: {
-            bsonType: 'string'
-          }
         }
+        
       }
     }
   }
 })
 
-db.usuarios.insertOne({ "username": "Andres", "password": "prueba", "rol": 0, "permisos": ["1.0.0", "2.0.0"] })
