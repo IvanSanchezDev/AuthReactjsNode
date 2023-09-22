@@ -7,6 +7,6 @@ export default defineConfig({
   plugins: [react()],
   server:{
     port : env.VITE_PORT_FRONTEND || 5122,
-    hostname:env.VITE_HOSTNAME || "localhost"
+    hostname:env.VITE_HOSTNAME || "192.168.129.72"
   }
 })

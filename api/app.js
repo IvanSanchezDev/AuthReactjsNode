@@ -15,7 +15,7 @@ app.use('/api/user', routesUser)
 
 const config={
     port : env.VITE_PORT_BACKEND || 5121,
-    hostname:env.VITE_HOSTNAME || "localhost"
+    hostname:env.VITE_HOSTNAME || "192.168.129.72"
 }
 
 console.log(env.VITE_PORT_BACKEND);
