@@ -62,7 +62,7 @@ export const AuthProvider=({children})=>{
 const traerInfo=async(accesToken)=>{
                
     try {
-        const response = await fetch(`http://localhost:1234/api/user`, {
+        const response = await fetch(`http://${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}/api/user`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

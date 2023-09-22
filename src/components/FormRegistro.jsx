@@ -19,7 +19,7 @@ const FormRegistro=()=>{
                 const hacerPeticion=async ()=>{
                     try {
                         
-                        const api='http://localhost:1234/api/auth/register'
+                        const api=`http://${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}/api/auth/register`
                         const response=await fetch(api, {
                             method:'POST',
                             headers: {

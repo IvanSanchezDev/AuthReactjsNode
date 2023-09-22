@@ -3,7 +3,7 @@ import { config } from 'dotenv'
 
 config()
 
-const uri = `mongodb+srv://${process.env.ATLAS_USER}:${process.env.ATLAS_PASSWORD}@clusterauthenticacion.lobajpy.mongodb.net/`
+const uri = `mongodb+srv://ivancampus:12345@clusterauthenticacion.lobajpy.mongodb.net/`
 
 
 const client = new MongoClient(uri, {

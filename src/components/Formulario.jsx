@@ -13,7 +13,7 @@ const Formulario=()=>{
     const onSubmit=handleSubmit(async (data)=>{
         try {
             
-            const api='http://localhost:1234/api/auth/login'
+            const api=`http://${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}/api/auth/login`
             const response=await fetch(api, {
                 method:'POST',
                 headers: {

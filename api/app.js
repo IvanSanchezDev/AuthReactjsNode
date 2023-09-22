@@ -1,10 +1,9 @@
 import express from 'express'
-import { config } from 'dotenv'
+import { loadEnv } from 'vite'
 import { routes as routesAuth } from './routes/auth.routes.js'
 import { routes as routesUser } from './routes/user.routes.js'
 import cors from 'cors'
-config()
-
+const env=loadEnv("development", process.cwd(), 'VITE')
 
 const app=express()
 
@@ -14,10 +13,15 @@ app.use(cors())
 app.use('/api/auth',  routesAuth)
 app.use('/api/user', routesUser)
 
-const myserver = JSON.parse(process.env.MY_SERVER)
+const config={
+    port : env.VITE_PORT_BACKEND || 5121,
+    hostname:env.VITE_HOSTNAME || "localhost"
+}
 
-const port = myserver.PORT || 3000
+console.log(env.VITE_PORT_BACKEND);
+console.log(env.VITE_HOSTNAME);
 
-app.listen(port, ()=>{
-    console.log(`server running in http://${myserver.HOSTNAME}:${port}`);
+
+app.listen(config, ()=>{
+    console.log(`server listening on http://${config.hostname}:${config.port}`);
 })
